@@ -3,7 +3,6 @@ import { AppBar, Badge, IconButton, InputBase, Toolbar, Typography } from '@mate
 import { More as MoreIcon, Menu as MenuIcon, Search as SearchIcon, Mail as MailIcon, Notifications as NotificationsIcon, AccountCircle} from '@material-ui/icons'
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     search: {
