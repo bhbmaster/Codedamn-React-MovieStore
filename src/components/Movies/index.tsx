@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Movie from './Movie'
+import './style.css'
 
 const API_KEY = "eb7f19c3"  // codecamps - my key  383e0fe3
 
 //const series = [ 'the triangle', 'avengers', 'inseption', 'interstellar' ]
-const series = [ 'the triangle', 'avengers', 'inception', 'interstellar' ]
+const series = [ 'the triangle', 'avengers', 'inception', 'interstellar', 'harry potter', 'lord of the rings', 'the expanse' ]
 
 //const series = [ 'avengers', 'interstellar' ]
 
@@ -35,7 +36,6 @@ const Movies: React.FC = props => {
 
          } )
     }, [])
-
     
 
     // useEffect(() => {
@@ -67,7 +67,7 @@ const Movies: React.FC = props => {
     console.log("MOVIES:", movies)
     // movies.forEach(m=>console.log("important stuff:", m.imdbID, m.Title, m.Year, m.Poster))
 
-    return <div>
+    return <div className="movies">
             { movies.flat(2).map((movie:any) => 
                 <Movie
                 key={movie.imdbID}
