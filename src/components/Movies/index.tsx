@@ -18,7 +18,7 @@ const Movies: React.FC<Props> = props => {
     // const [movies,setMovies] = useState([])
 
     useEffect(() => {
-        const promises = series.map(series=>{return fetch(`http://www.omdbapi.com/?t=${encodeURIComponent(series)}&apikey=${API_KEY}&page=1`).then(
+        const promises = series.map(series=>{return fetch(`http://www.omdbapi.com/?s=${encodeURIComponent(series)}&apikey=${API_KEY}&page=1`).then(
             r=>{
                 let answer=r.json()
                 //console.log("here:",answer);
@@ -28,9 +28,21 @@ const Movies: React.FC<Props> = props => {
         })
 
         Promise.all(promises).then((movies: any) => {
-           props.setMovies(movies)
-           props.setTempMovies(movies)
-           //setMovies(movies.map((movie: any) => movie.Search))
+           //props.setMovies(movies)
+           //props.setTempMovies(movies)
+           //props.setMovies(movies.map((movie: any) => movie.Search))
+
+            const updateMovies: any = movies.map((movie:any) => movie.Search).flat(2).map(
+                (movie: any) => ({
+                    title: movie.Title,
+                    year: movie.Year,
+                    image: movie.Poster,
+                    imdb: movie.imdbID
+                }))
+
+            props.setMovies(updateMovies)
+             props.setTempMovies(updateMovies)
+
          } )
     }, [])
 
@@ -45,14 +57,25 @@ const Movies: React.FC<Props> = props => {
         )
     }
 
+    // return <div className="movies">
+    //         { props.movies.flat(2).map((movie:any) => 
+    //             <Movie
+    //             key={movie.imdbID}
+    //             title={movie.Title}
+    //             year={movie.Year}
+    //             image={movie.Poster}/> )}
+    //     </div>
+
     return <div className="movies">
-            { props.movies.flat(2).map((movie:any) => 
-                <Movie
+        {props.movies.map((movie: any) => {
+            return <Movie
                 key={movie.imdbID}
-                title={movie.Title}
-                year={movie.Year}
-                image={movie.Poster}/> )}
-        </div>
+                title={movie.title}
+                year={movie.year}
+                image={movie.image}
+            />
+        })}
+    </div>
 
 }
 

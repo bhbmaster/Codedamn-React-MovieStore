@@ -60,8 +60,8 @@ const Header: React.FC<Props> = props => {
     setInputVal(search)
     console.log("prop movies: ",props.movies)
     //props.setMovies(props.movies.filter((movie:any)=>movie.contains(search)))
-    //props.setMovies(props.movies.filter((movie:any) => movie.title.toLowerCase().includes(search)))
-    props.setMovies(search)
+    props.setMovies(props.movies.filter((movie:any) => movie.title.toLowerCase().includes(search)))
+    //props.setMovies(search)
   }
   
   return (
@@ -121,6 +121,8 @@ const Header: React.FC<Props> = props => {
           </div>
         </Toolbar>
       </AppBar>
-) }
+) 
+
+}
 
 export default Header

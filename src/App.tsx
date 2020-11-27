@@ -4,10 +4,17 @@ import './App.css'
 import Header from './components/Header'
 import Movies from './components/Movies'
 
+type Movie = {
+  imdbID: string
+  title: string
+  image: string
+  year: string
+}
+
 function App() {
 
-  const [movies,setMovies] = useState([])
-  const [tempMovies,setTempMovies] = useState([])
+  const [movies,setMovies] = useState<Movie[]>([])
+  const [tempMovies,setTempMovies] = useState<Movie[]>([])
 
   return (
     <div className="App">
