@@ -50,7 +50,6 @@ const Movies: React.FC<Props> = props => {
     }, [])
 
     if (props.movies.length === 0) {
-        console.log("Loader")
         return ( 
                 <div className="loader">
                     <CircularProgress/>
