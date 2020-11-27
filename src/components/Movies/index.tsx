@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Movie from './Movie'
 import './style.css'
 import { CircularProgress } from '@material-ui/core'
+import { AnyAaaaRecord } from 'dns'
 
 type Props = {
     movies: any
@@ -9,9 +10,17 @@ type Props = {
     setTempMovies: any
 }
 
+type Movie = {
+    imdbID: string
+    title: string
+    image: string
+    year: string
+  }
+  
+
 const API_KEY = "eb7f19c3"  // codecamps - my key  383e0fe3
 
-const series = [ 'the triangle', 'avengers', 'inception', 'interstellar', 'harry potter', 'lord of the rings', 'the expanse' ]
+const series = [  'star wars', 'goodfellas', 'scream', 'king kong', 'shawshank redemption', 'jaws','brick','princess mononoke', 'dragon ball', 'the fountain', 'back to the future', 'crouching tiger, hidden dragon', 'superman', 'the expanse', 'saw', 'lord of the rings', 'harry potter', "interstellar", "avengers", "the triangle"]
 
 const Movies: React.FC<Props> = props => {
 
@@ -32,7 +41,7 @@ const Movies: React.FC<Props> = props => {
            //props.setTempMovies(movies)
            //props.setMovies(movies.map((movie: any) => movie.Search))
 
-            const updateMovies: any = movies.map((movie:any) => movie.Search).flat(2).map(
+            const updateMovies: Movie[] = movies.map((movie: any) => movie.Search).flat(2).map(
                 (movie: any) => ({
                     title: movie.Title,
                     year: movie.Year,
@@ -67,7 +76,7 @@ const Movies: React.FC<Props> = props => {
     //     </div>
 
     return <div className="movies">
-        {props.movies.map((movie: any) => {
+        {props.movies.map((movie: Movie) => {
             return <Movie
                 key={movie.imdbID}
                 title={movie.title}
