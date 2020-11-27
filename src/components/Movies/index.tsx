@@ -3,13 +3,19 @@ import Movie from './Movie'
 import './style.css'
 import { CircularProgress } from '@material-ui/core'
 
+type Props = {
+    movies: any
+    setMovies: any
+    setTempMovies: any
+}
+
 const API_KEY = "eb7f19c3"  // codecamps - my key  383e0fe3
 
 const series = [ 'the triangle', 'avengers', 'inception', 'interstellar', 'harry potter', 'lord of the rings', 'the expanse' ]
 
-const Movies: React.FC = props => {
+const Movies: React.FC<Props> = props => {
 
-    const [movies,setMovies] = useState([])
+    // const [movies,setMovies] = useState([])
 
     useEffect(() => {
         const promises = series.map(series=>{return fetch(`http://www.omdbapi.com/?t=${encodeURIComponent(series)}&apikey=${API_KEY}&page=1`).then(
@@ -22,14 +28,15 @@ const Movies: React.FC = props => {
         })
 
         Promise.all(promises).then((movies: any) => {
-           setMovies(movies)
+           props.setMovies(movies)
+           props.setTempMovies(movies)
            //setMovies(movies.map((movie: any) => movie.Search))
          } )
     }, [])
 
     //console.log("MOVIES:", movies)
 
-    if (movies.length === 0) {
+    if (props.movies.length === 0) {
         console.log("Loader")
         return ( 
                 <div className="loader">
@@ -39,7 +46,7 @@ const Movies: React.FC = props => {
     }
 
     return <div className="movies">
-            { movies.flat(2).map((movie:any) => 
+            { props.movies.flat(2).map((movie:any) => 
                 <Movie
                 key={movie.imdbID}
                 title={movie.Title}
