@@ -7,7 +7,6 @@ type Props = {
     image: string
 }
 
-//const Movie: React.FC = props => {
 const Movie: React.FC<Props> = props => {
 
     //console.log("movie props", props)

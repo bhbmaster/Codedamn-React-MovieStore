@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Movie from './Movie'
 import './style.css'
 import { CircularProgress } from '@material-ui/core'
-import { AnyAaaaRecord } from 'dns'
 
 type Props = {
     movies: any
@@ -24,8 +23,6 @@ const series = [  'star wars', 'goodfellas', 'scream', 'king kong', 'shawshank r
 
 const Movies: React.FC<Props> = props => {
 
-    // const [movies,setMovies] = useState([])
-
     useEffect(() => {
         const promises = series.map(series=>{return fetch(`http://www.omdbapi.com/?s=${encodeURIComponent(series)}&apikey=${API_KEY}&page=1`).then(
             r=>{
@@ -37,9 +34,6 @@ const Movies: React.FC<Props> = props => {
         })
 
         Promise.all(promises).then((movies: any) => {
-           //props.setMovies(movies)
-           //props.setTempMovies(movies)
-           //props.setMovies(movies.map((movie: any) => movie.Search))
 
             const updateMovies: Movie[] = movies.map((movie: any) => movie.Search).flat(2).map(
                 (movie: any) => ({
@@ -50,12 +44,10 @@ const Movies: React.FC<Props> = props => {
                 }))
 
             props.setMovies(updateMovies)
-             props.setTempMovies(updateMovies)
+            props.setTempMovies(updateMovies)
 
          } )
     }, [])
-
-    //console.log("MOVIES:", movies)
 
     if (props.movies.length === 0) {
         console.log("Loader")
@@ -65,15 +57,6 @@ const Movies: React.FC<Props> = props => {
                 </div>
         )
     }
-
-    // return <div className="movies">
-    //         { props.movies.flat(2).map((movie:any) => 
-    //             <Movie
-    //             key={movie.imdbID}
-    //             title={movie.Title}
-    //             year={movie.Year}
-    //             image={movie.Poster}/> )}
-    //     </div>
 
     return <div className="movies">
         {props.movies.map((movie: Movie) => {

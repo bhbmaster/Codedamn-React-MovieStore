@@ -56,12 +56,10 @@ const Header: React.FC<Props> = props => {
   const [inputVal,setInputVal] = useState<string>("")
 
   function updateMovies(search: string) {
-    console.log("search: ", search)
+    //console.log("search: ", search)
     setInputVal(search)
-    console.log("prop movies: ",props.movies)
-    //props.setMovies(props.movies.filter((movie:any)=>movie.contains(search)))
+    //console.log("prop movies: ",props.movies)
     props.setMovies(props.movies.filter((movie:any) => movie.title.toLowerCase().includes(search)))
-    //props.setMovies(search)
   }
   
   return (
